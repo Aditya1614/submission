@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-day_df = pd.read_csv(".../main_data.csv")
+day_df = pd.read_csv("dashboard/main_data.csv")
 
 st.title("Bike Sharing Dataset | Dashboard")
 
