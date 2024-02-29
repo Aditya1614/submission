@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-day_df = pd.read_csv("dashboard/main_data.csv")
+day_df = pd.read_csv("main_data.csv")
 
 st.title("Bike Sharing Dataset | Dashboard")
 
@@ -130,3 +130,34 @@ with col4:
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.barplot(data=day_df, x="season", y="cnt", hue="season", errorbar=None)
 st.pyplot(fig)
+
+st.subheader("RFM Analysis")
+
+tab1, tab2, tab3 = st.tabs(["Recency", "Frequency", "Monetary"])
+
+with tab1:
+    st.write("Recency (R): Mengevaluasi seberapa baru pelanggan terakhir kali melakukan aktivitas, seperti peminjaman sepeda. Semakin baru, semakin baik, karena pelanggan yang lebih baru mungkin lebih cenderung melakukan transaksi lagi.")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    plt.hist(day_df['Recency'], bins=30, edgecolor='k', alpha=0.7)
+    plt.title('Recency Distribution')
+    plt.xlabel('Recency (Days)')
+    plt.ylabel('Frequency')
+    st.pyplot(fig)
+
+with tab2:
+    st.write("Frequency (F): Mengukur seberapa sering pelanggan melakukan aktivitas tertentu, seperti peminjaman sepeda. Pelanggan yang sering melakukan aktivitas ini cenderung lebih berharga karena mereka dapat berkontribusi lebih banyak pendapatan.")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    plt.hist(day_df['Frequency'], bins=30, edgecolor='k', alpha=0.7)
+    plt.title('Frequency Distribution')
+    plt.xlabel('Frequency (Number of Days)')
+    plt.ylabel('Frequency')
+    st.pyplot(fig)
+
+with tab3:
+    st.write("Monetary (M): Menilai seberapa banyak uang yang dihabiskan oleh pelanggan dalam aktivitas tertentu. Pelanggan yang menghabiskan lebih banyak uang cenderung lebih berharga bagi bisnis.")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    plt.hist(day_df['Monetary'], bins=30, edgecolor='k', alpha=0.7)
+    plt.title('Monetary Distribution')
+    plt.xlabel('Monetary (Count of Bike Rentals)')
+    plt.ylabel('Frequency')
+    st.pyplot(fig)
